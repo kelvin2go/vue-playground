@@ -68,7 +68,7 @@ export default {
         {
           title: 'CAM',
           src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-          url: 'tv',
+          url: 'cam',
           flex: 6
         }
       ]
