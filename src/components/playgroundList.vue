@@ -63,7 +63,13 @@ export default {
           title: 'Youtube TV',
           src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
           url: 'tv',
-          flex: 12
+          flex: 6
+        },
+        {
+          title: 'CAM',
+          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+          url: 'tv',
+          flex: 6
         }
       ]
     }
