@@ -23,6 +23,7 @@ Vue.use(Vuetify, {
     secondary: '#424242'
   }
 })
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

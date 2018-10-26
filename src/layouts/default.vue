@@ -2,6 +2,8 @@
 <template>
   <div id="app" class="main">
     <v-app>
+      <Header />
+      {{$router.path}}
       <v-content :class="[{ drawer: sidebar }]">
         <router-view/>
       </v-content>
@@ -46,6 +48,8 @@ html {
 
 <script>
 import { mapGetters } from 'vuex'
+import Header from '@/components/header.vue'
+
 export default {
   computed: {
     ...mapGetters([
@@ -53,6 +57,11 @@ export default {
     ])
   },
   components: {
+    Header
   }
 }
 </script>
+
+<style lang="stylus">
+
+</style>

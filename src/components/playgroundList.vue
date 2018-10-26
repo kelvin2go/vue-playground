@@ -7,16 +7,20 @@
           grid-list-md
         >
           <v-layout row wrap>
+            <v-flex xs12>
+              <h1 class="display-1">This is my vue playground</h1>
+            </v-flex>
             <v-flex
               v-for="card in cards"
               v-bind="{ [`xs${card.flex}`]: true }"
               :key="card.title"
             >
               <router-link :tag="card.url" :to="card.url">
-                <v-card>
+                <v-card height="500px">
                   <v-img
                     :src="card.src"
-                    height="500px"
+                    height="90%"
+                    width="auto"
                   >
                     <v-container
                       fill-height
@@ -32,16 +36,7 @@
                   </v-img>
 
                   <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn icon>
-                      <v-icon>favorite</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                      <v-icon>bookmark</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                      <v-icon>share</v-icon>
-                    </v-btn>
+                    <div class="title">{{card.description}}</div>
                   </v-card-actions>
                 </v-card>
               </router-link>
@@ -61,14 +56,16 @@ export default {
       cards: [
         {
           title: 'Youtube TV',
-          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+          src: '/static/TV10-26-2018-min.png',
           url: 'tv',
+          description: 'Simulate for playing YouTube playlist on TV mode',
           flex: 6
         },
         {
-          title: 'CAM',
-          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-          url: 'tv',
+          title: 'Camera image recongizer',
+          src: '/static/Cam10-26-2018-min.png',
+          url: 'cam',
+          description: 'Google vision api to recongize object through cam',
           flex: 6
         }
       ]

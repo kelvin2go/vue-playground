@@ -161,7 +161,7 @@ export default {
   position: absolute
   bottom: 0
   left: 44%
-.grey-bg 
+.grey-bg
   background-color: rgba(101, 101, 101, 0.4)
 
 </style>
