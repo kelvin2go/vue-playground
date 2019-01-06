@@ -2,18 +2,15 @@
   <v-toolbar fixed app :clipped-left="clipped" v-on:scroll="handleScroll" v-bind:class="{solid: this.scroll > 48}">
     <a id="brand" href="/"><v-toolbar-title class="titleText" v-text="title"></v-toolbar-title></a>
     <v-spacer></v-spacer>
-    <v-list-tile
-      router
-      :to="item.to"
+    <a
+      :href="item.to"
       :key="i"
       v-for="(item, i) in items"
-      exact
-      class="menuText white--text"
-    >
+      class="menuText white--text">
       <v-list-tile-content>
         <v-list-tile-title class="white--text" v-text="item.title"></v-list-tile-title>
       </v-list-tile-content>
-    </v-list-tile>
+    </a>
   </v-toolbar>
 </template>
 
@@ -52,10 +49,34 @@ export default {
 </script>
 
 <style lang="stylus">
+  .menuText
+    text-transform: capitalize
+
+    webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    position: relative;
+    text-decoration: none;
+    -webkit-transition: .3s cubic-bezier(.25,.8,.5,1);
+    transition: .3s cubic-bezier(.25,.8,.5,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
   .theme--light
     .v-toolbar
       z-index: 300
-      background: rgba(18, 21, 20, 0.55)
+      background: rgba(18, 21, 20, 0.55) !important
       font-family: Raleway, Helvetica, Arial, sans-serif
       &.solid
         background: rgba(18, 21, 20, 0.4)

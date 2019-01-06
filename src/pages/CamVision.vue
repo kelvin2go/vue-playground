@@ -1,32 +1,35 @@
 <template>
   <v-card flat>
-    <video
-      ref="video"
-      id="video"
-      autoplay
-      muted
-      playsinline
-    ></video>
-    <canvas
-      ref="canvas"
-      id="canvas"
-      height="720"
-    ></canvas>
     <v-container
-      class="report-container"
+      class="container"
       fill-height
       fluid
+      style="padding:0; background-color:grey"
     >
       <v-layout
+        align-center
+        justify-center
+        row
         fill-height
-        v-if="imgReport.length > 0"
-        :class="{'grey-bg': imgReport.length > 0}"
       >
+        <WebCam
+          ref="webcam"
+          :deviceId="deviceId"
+          width="auto"
+          height="100%"
+          @cameras="onCameras"
+          @camera-change="onCameraChange"
+          :isFrontCam="frontCam"
+          :googleKey="googleKey"
+        >
+        </WebCam>
         <v-flex
           xs12
           align-end
           flexbox
           class="report"
+          v-if="imgReport.length > 0"
+          :class="{'grey-bg': imgReport.length > 0}"
         >
           <div
             class="text-capitalize font-weight-thin font-italic display-4"
@@ -71,10 +74,10 @@
       class="videoActions"
       align-content-center
     >
-      <div>
+      <v-flex xs3>
         <v-btn
           class="shutter"
-          color="white"
+          color="info"
           flat
           outline
           fab
@@ -83,99 +86,76 @@
         >
           <v-icon large>camera</v-icon>
         </v-btn>
-      </div>
+      </v-flex>
+      <v-spacer></v-spacer>
+      <v-flex xs3>
+        <v-switch
+          color="info"
+          v-model="frontCam"
+        >
+          <v-icon>camera_front</v-icon>
+        </v-switch>
+      </v-flex>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import axios from 'axios'
+import { WebCam } from 'vue-cam-vision'
 import * as config from '../config/cam'
-import getUserMedia from 'getusermedia'
 
 export default {
   data () {
     return {
       captures: [],
       imgReport: [],
-      frontCam: false,
-      webcam: null
+      frontCam: true,
+      webcam: null,
+      img: null,
+      camera: null,
+      deviceId: null,
+      devices: [],
+      googleKey: config.googleVisionKey
     }
   },
+  components: {
+    WebCam
+  },
   mounted () {
-    // this.openCam()
-    this.open()
   },
   computed: {
-    camContraints () {
-      return {
-        video: {
-          facingMode: (this.frontCam ? 'user' : 'environment')
-        }
+
+  },
+  watch: {
+    camera: function (id) {
+      this.deviceId = id
+    },
+    devices: function () {
+      // Once we have a list select the first one
+      let first = this.devices || this.devices[0]
+      if (first) {
+        this.camera = first.deviceId
+        this.deviceId = first.deviceId
       }
     }
   },
   methods: {
-    open () {
-      getUserMedia((err, stream) => {
-        if (err) {
-          console.log('failed')
-        } else {
-          console.log('got a stream', stream)
-          this.video = this.$refs.video
-          if ('srcObject' in this.video) {
-            this.video.srcObject = stream
-          } else {
-            this.video.src = window.URL.createObjectURL(stream)
-          }
-          this.video.onloadedmetadata = () => {
-            this.video.play()
-          }
-          this.video.play()
-        }
-      })
+    async sendGVision () {
+      const { labelAnnotations } = await this.$refs.webcam.googleVision()
+      this.imgReport = labelAnnotations
     },
-    openCam () {
-      this.video = this.$refs.video
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia(this.camContraints)
-          .then(stream => {
-            this.video.src = window.URL.createObjectURL(stream)
-            this.video.play()
-          })
-      }
+    async capture () {
+      this.img = await this.$refs.webcam.capture()
+      this.sendGVision()
     },
-    async readImg (index) {
-      console.log(config.apiUrls)
-      const sendData = {
-        image: {
-          content: this.captures[index].image
-            .replace('data:image/jpeg;base64,', '')
-        },
-        features: { type: 'LABEL_DETECTION', maxResults: 5 }
-      }
-      let { data } = await axios.post(
-        config.apiUrls.cloudVision,
-        { requests: [sendData] }
-      )
-      console.log(data)
-      if (data && data.responses[0].labelAnnotations) {
-        this.imgReport = data.responses[0].labelAnnotations
-        this.captures[index].imgReport = data.responses[0].labelAnnotations
-      }
+    onCameras (cameras) {
+      this.devices = cameras
+      console.log('On Cameras Event', cameras)
     },
-    capture () {
-      this.canvas = this.$refs.canvas
-      this.canvas.getContext('2d').drawImage(this.video, 0, 0, 640, 640)
-      const URL = this.canvas.toDataURL('image/jpeg', 1)
-      if (this.captures.length > 3) {
-        this.captures.shift()
-      }
-      this.captures.push({
-        image: URL,
-        imgReport: {}
-      })
-      this.readImg(this.captures.length - 1)
+    onCameraChange (deviceId) {
+      this.deviceId = deviceId
+      this.camera = deviceId
+      console.log('On Camera Change Event', deviceId)
     }
   },
   filters: {
@@ -242,6 +222,9 @@ export default {
 .report {
   z-index: 600;
   color: white;
+  position: absolute;
+  width: 50%;
+  height: 50%;
 }
 
 #video {

@@ -56,5 +56,6 @@ export default {
   }
   .tv-card {
     padding-bottom: 10px;
+    height: auto !important;
   }
 </style>

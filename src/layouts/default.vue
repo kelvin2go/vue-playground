@@ -2,8 +2,6 @@
 <template>
   <div id="app" class="main">
     <v-app>
-      <Header />
-      {{$router.path}}
       <v-content :class="[{ drawer: sidebar }]">
         <router-view/>
       </v-content>
@@ -13,7 +11,7 @@
 
 <style lang="stylus">
 html {
-  font-family: Roboto;
+  font-family: 'medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif';
   font-size: 14px;
   font-style: normal;
   font-stretch: normal;
@@ -48,7 +46,6 @@ html {
 
 <script>
 import { mapGetters } from 'vuex'
-import Header from '@/components/header.vue'
 
 export default {
   computed: {
@@ -57,7 +54,6 @@ export default {
     ])
   },
   components: {
-    Header
   }
 }
 </script>

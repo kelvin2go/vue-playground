@@ -1,5 +1,10 @@
 <template>
-  <v-layout class="fullscreen" :class="[{ drawer: drawer }]" @mouseenter="mouseOver" @mouseleave="mouseLeave">
+  <v-layout
+    class="fullscreen"
+    :class="[{ drawer: drawer }]"
+    @mouseenter="mouseOver"
+    @mouseleave="mouseLeave"
+  >
     <v-navigation-drawer
       :clipped="clipped"
       class="toolbar"
@@ -9,12 +14,27 @@
       app
       hide-overlay
       fixed
-      >
-      <YoutubeList :tv-list="allList.items" @changeChannel="changeChannel" />
+    >
+      <YoutubeList
+        :tv-list="allList.items"
+        @changeChannel="changeChannel"
+      />
     </v-navigation-drawer>
-    <v-toolbar dark white--text absolute class="menuBar" v-show="drawer || hover ">
+    <v-toolbar
+      dark
+      white--text
+      absolute
+      class="menuBar"
+      v-show="drawer || hover "
+    >
       <v-toolbar-side-icon @click="toggleDrawer"></v-toolbar-side-icon>
-      <v-flex xs5 sm6 md3 white--text :label="currentIndex">
+      <v-flex
+        xs5
+        sm6
+        md3
+        white--text
+        :label="currentIndex"
+      >
         <v-text-field
           label="Watch youtube playlist"
           placeholder="playlist ID"
@@ -29,7 +49,14 @@
     </v-toolbar>
     <v-flex xs-12>
       <div class="videoContainer">
-        <youtube width="100%" height="100%" :video-id="currentVideo.id" :player-vars="playerVars" @playing="playing" @ended="currentIndex++"></youtube>
+        <youtube
+          width="100%"
+          height="100%"
+          :video-id="currentVideo.id"
+          :player-vars="playerVars"
+          @playing="playing"
+          @ended="currentIndex++"
+        ></youtube>
       </div>
     </v-flex>
   </v-layout>
@@ -113,7 +140,7 @@ export default {
     ]),
     redirectVID (playlistId) {
       this.videoListId = playlistId
-      this.$router.push({name: 'TV', params: { id: playlistId }})
+      this.$router.push({ name: 'TV', params: { id: playlistId } })
     },
     changeChannel (index) {
       this.currentIndex = index
@@ -166,7 +193,7 @@ export default {
         }
         return { tvList: {
           items: {}
-        }}
+        } }
       } catch (err) {
         console.log(err)
       }
@@ -176,27 +203,35 @@ export default {
 </script>
 
 <style lang="stylus">
-.fullscreen
-  .menuBar
-    color: rgba(0, 0, 0, 0.7)
-  .toolbar
-    z-index: 3000
-  .v-navigation-drawer
-    z-index: 4000
-  &.drawer
-    padding-left: 330px
+.fullscreen {
+  .menuBar {
+    color: rgba(0, 0, 0, 0.7);
+  }
 
-.videoContainer
-  position: absolute
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  bottom: 0
-  right: 0
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
+  .toolbar {
+    z-index: 3000;
+  }
 
+  .v-navigation-drawer {
+    z-index: 4000;
+  }
+
+  &.drawer {
+    padding-left: 330px;
+  }
+}
+
+.videoContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 </style>

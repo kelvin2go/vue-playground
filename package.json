@@ -10,12 +10,15 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "NODE_ENV=production node build/build.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "getusermedia": "^2.0.1",
     "lodash": "^4.17.11",
     "vue": "^2.5.2",
+    "vue-cam-vision": "^0.0.1",
+    "vue-gtm": "^2.0.0",
     "vue-router": "^3.0.1",
     "vue-webrtc": "^1.0.0",
     "vue-youtube": "^1.2.5",

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import playgroundList from '@/components/playgroundList'
 import tv from '@/pages/tv'
 import cam from '@/pages/cam'
+import vision from '@/pages/CamVision'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/cam/:id?',
       name: 'CAM',
       component: cam
+    },
+    {
+      path: '/vision/:id?',
+      name: 'vison',
+      component: vision
     }
   ]
 })

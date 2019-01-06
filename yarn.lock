@@ -3226,6 +3226,13 @@ getstats@latest:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/getstats/-/getstats-1.0.6.tgz#ca6f5ce991a411d9de95816a69af6a4dc2c2592f"
 
+getusermedia@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/getusermedia/-/getusermedia-2.0.1.tgz#f81af9795bc5934649813f7d092dd65030b34655"
+  integrity sha1-+Br5eVvFk0ZJgT99CS3WUDCzRlU=
+  dependencies:
+    webrtc-adapter "^2.0.2"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -6397,6 +6404,11 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
+sdp@^1.0.0:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/sdp/-/sdp-1.5.4.tgz#8e038f6ddb14bd765ae1f4b5216e12094511e0d0"
+  integrity sha1-jgOPbdsUvXZa4fS1IW4SCUUR4NA=
+
 sdp@^2.6.0, sdp@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/sdp/-/sdp-2.9.0.tgz#2eed2d9c0b26c81ff87593107895c68d6fb9a0a6"
@@ -7341,6 +7353,14 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-cam-vision@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/vue-cam-vision/-/vue-cam-vision-0.0.1.tgz#0e112c396693006f0648a0bb1346775e2005660f"
+  integrity sha512-Ti6F8mIpfTB41Tj4UR6XwHReP7uzzWTMyQfQyu1UMSr0cXCsY1bsIzXJTbHykKsb8ZV++Qq+TdedNPoVNbQEcA==
+  dependencies:
+    axios "^0.18.0"
+    vue "^2.5.17"
+
 vue-cli-plugin-vuetify@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.2.1.tgz#fea624e5e4cf3cc2e655d469d441ec151fbb2c23"
@@ -7355,6 +7375,10 @@ vue-eslint-parser@^2.0.3:
     espree "^3.5.2"
     esquery "^1.0.0"
     lodash "^4.17.4"
+
+vue-gtm@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-gtm/-/vue-gtm-2.0.0.tgz#8e6ce2408410abda9787e68d257cb1a957c75805"
 
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
@@ -7433,6 +7457,11 @@ vue-youtube@^1.2.5:
 vue@^2.0.1, vue@^2.5.2:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+vue@^2.5.17:
+  version "2.5.21"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
+  integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
 
 vuetify@^1.2.10:
   version "1.2.10"
@@ -7577,6 +7606,13 @@ webpack@^3.6.0:
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
+
+webrtc-adapter@^2.0.2:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-2.1.0.tgz#612b5bc6ce8e73c9d0660038a21f9255a867bf3e"
+  integrity sha1-YStbxs6Oc8nQZgA4oh+SVahnvz4=
+  dependencies:
+    sdp "^1.0.0"
 
 webrtc-adapter@latest:
   version "6.4.4"
